@@ -5,6 +5,7 @@ const http = require("http");
 const cors = require("cors");
 const Database = require("./Config/db");
 const Message = require("./models/Message");
+const logger = require("./Utils/logger");
 require("dotenv").config();
 
 const app = express();
@@ -27,15 +28,17 @@ app.use("/api/lovechatv1/message", messageRouter);
 
 // Socket
 io.on("connection", (socket) => {
-  console.log("User connected");
+  logger.info("User connected");
 
   socket.on("send_message", async (data) => {
+    logger.info("Message sent");
     const newMessage = new Message(data);
     await newMessage.save();
     io.emit("receive_message", data);
   });
 
   socket.on("disconnect", () => {
+    logger.info("User disconnected");
     console.log("User disconnected");
   });
 });

@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.0.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "express-validator": "^7.2.1",
